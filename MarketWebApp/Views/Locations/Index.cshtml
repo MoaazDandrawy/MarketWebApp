@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MarketWebApp.Models.Entity.Location>
+
+@{
+    ViewData["Title"] = "Location Table";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by name">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="searchButton"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1>All Locations</h1>
+        </div>
+        <div class="col-2">
+            <a asp-action="Create" class="btn btn-outline-light custom-btn-style"><i class="fa fa-plus-square"></i> Add New Location</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="productTableContainer">
+    </div>
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center " style="padding-bottom: 40px;" id="pagination"></ul>
+        </nav>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var pageNumber = 1;
+
+            loadProductData(pageNumber);
+
+            $('#searchInput').keyup(function () {
+                loadProductData(pageNumber);
+            });
+
+            function loadProductData(pageNumber) {
+                var searchQuery = $('#searchInput').val();
+
+                $.ajax({
+                    url: '/Locations/GetLocation',
+                    type: 'GET',
+                    data: { pageNumber: pageNumber, pageSize: 5, searchQuery: searchQuery },
+                    success: function (data) {
+                        $('#productTableContainer').html(data);
+                        displayPagination(pageNumber);
+                    },
+                    error: function () {
+                        console.log('Error loading data.');
+                    }
+                });
+            }
+
+            function displayPagination(pageNumber) {
+                var pagination = $('#pagination');
+                pagination.empty();
+
+                for (var i = 1; i <= @ViewBag.PageCount; i++) {
+                    var li = '<li class="page-item' + (i === pageNumber ? ' active' : '') + '">' +
+                        '<a class="page-link" href="#" data-page="' + i + '">' + i + '</a>' +
+                        '</li>';
+
+                    pagination.append(li);
+                }
+
+                pagination.find('a').click(function (e) {
+                    e.preventDefault();
+                    loadProductData($(this).data('page'));
+                });
+            }
+        });
+    </script>
+}

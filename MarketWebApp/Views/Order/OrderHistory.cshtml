@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MarketWebApp.Models.Entity.Order>
+
+@{
+    ViewData["Title"] = "OrderHistory";
+}
+
+@* <h1>Order History</h1> *@
+<section class="shoping-cart spad py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1 class="display-4 text-primary mb-4">Your Order History</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th>State</th>
+                                <th>Date</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="text-center">
+                                    <td>@item.State</td>
+                                    <td>@item.Date</td>
+                                    <td>
+                                        <a href="@Url.Action("OrderInfo", "order", new { id = item.ID })" class="btn btn-info">Info</a>
+                                        @if (@item.State == "Pending")
+                                        {
+                                            <a href="@Url.Action("CancelOrder", "order", new { id = item.ID })" data-order-id="@item.ID" class="btn btn-danger cancel-order-btn">Cancle Order</a>
+                                        }
+                                    </td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var cancelOrderButtons = document.querySelectorAll('.cancel-order-btn');
+
+        cancelOrderButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                event.preventDefault();
+                var orderId = this.getAttribute('data-order-id');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, cancel it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect to the CancelOrder action with the order ID
+                        window.location.href = '@Url.Action("CancelOrder", "order")?id=' + orderId;
+                    }
+                });
+            });
+        });
+    });
+</script>

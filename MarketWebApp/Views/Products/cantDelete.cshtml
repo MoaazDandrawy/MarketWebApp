@@ -1,0 +1,26 @@
+﻿@model MarketWebApp.Models.Entity.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<center>
+    <div class="align-content-center">
+        <div class="container">
+            <div class="card" style="width: 350px;">
+                <img src="~/CantDelete.jpg" class="card-img-top" style="width: 200px; display: block; margin: 0 auto;" alt="...">
+                <div class="card-body">
+                    <form asp-action="ConfirmDelete">
+                        <input type="hidden" name="Id" value="@Model.ID"><hr>
+                        <h3> You Cant Not Delete (@Model.Name) Because Is found in order </h3>
+                        <br />
+                        <div>
+                            <a class="btn btn-outline-success rounded-3" asp-action="Index"> Back To All Product </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>

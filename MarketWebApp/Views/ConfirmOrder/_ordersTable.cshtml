@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MarketWebApp.ViewModel.UserOrdersViewModel>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-danger">
+        <tr>
+                <th class="text-center">User Name</th>
+                <th class="text-center">Order ID</th>
+                <th class="text-center">Order Date</th>
+                <th class="text-center">Order State</th>
+                <th class="text-center">Order Details</th>
+
+                <!-- Add other table headers for additional order details -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userOrdersViewModel in Model)
+            {
+                @for (int i = 0; i < userOrdersViewModel.Orders.Count(); i++)
+                {
+                    <tr>
+                        @if (i == 0) // Only display user name for the first order
+                        {
+                            <td rowspan="@userOrdersViewModel.Orders.Count()" class="fw-bold text-center">@userOrdersViewModel.User.UserName</td>
+                        }
+                        <td class="text-center">@userOrdersViewModel.Orders[i].ID</td>
+                        <td class="text-center">@userOrdersViewModel.Orders[i].Date</td>
+                        <td class="text-center">@userOrdersViewModel.Orders[i].State</td>
+                        <td>
+                        <a href="@Url.Action("AcceptOrder", "ConfirmOrder", new { Id = @userOrdersViewModel.Orders[i].ID })" class="btn btn-outline-success"><i class="fa fa-check"></i> Confirm Order</a>
+                        <a href="@Url.Action("RejectOrder", "ConfirmOrder", new { Id = @userOrdersViewModel.Orders[i].ID })" class="btn btn-outline-danger"><i class="fa fa-ban"></i> Reject Order</a>
+                        <a href="@Url.Action("DetailsOfOrder", "ConfirmOrder", new { Id = @userOrdersViewModel.Orders[i].ID })" class="btn btn-secondary"><i class="fa fa-info-circle"></i> Details</a> 
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+
+
+
+    </table>

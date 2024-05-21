@@ -1,0 +1,115 @@
+﻿@model IEnumerable<MarketWebApp.Models.Entity.Order>
+
+@{
+    ViewData["Title"] = "Generate PDF";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container text-center">
+    <h1 class="m-0 font-weight-bold text-primary p-3">Report</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="m-0 font-weight-bold text-primary"><b>Summary</b></h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Number Of Category</th>
+                                <th scope="col">Number Of Supplier</th>
+                                <th scope="col">Number Of Product</th>
+                                <th scope="col">Number Of Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@ViewBag.CategoryCount</td>
+                                <td>@ViewBag.SupplierCount</td>
+                                <td>@ViewBag.productCount</td>
+                                <td>@ViewBag.orderCount</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="m-0 font-weight-bold text-primary"><b>Earnings</b></h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col" colspan="3">Number Of Order in Current Month</th>
+                                <th scope="col" colspan="3">Number Of Order in Current Year</th>
+                            </tr>
+                        </thead>
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Month</th>
+                                <th scope="col">Number Of Order</th>
+                                <th scope="col">Cost</th>
+                                <th scope="col">Year</th>
+                                <th scope="col">Number Of Order</th>
+                                <th scope="col">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                DateTime currentDate = DateTime.Now;
+                                <tr>
+                                    <td>@item.Date.Month</td>
+                                    @if (item.Date.Month == currentDate.Month)
+                                    {
+                                        <td>@ViewBag.orderCount</td>
+                                        <td>@Html.DisplayFor(modelItem => item.OrderProducts)</td>
+                                    }
+                                    <td>@item.Date.Year</td>
+                                    @if (item.Date.Year == currentDate.Year)
+                                    {
+                                        <td>@ViewBag.orderCount</td>
+                                        <td>@Html.DisplayFor(modelItem => item.OrderProducts)</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="col-xl-12 col-lg-7">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 text-center ">
+                <h4 class="m-0 font-weight-bold text-primary "><b>Earnings Overview</b></h4>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myAreaChart" style="display: block; width: 421px; height: 320px;" width="421" height="320" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a class="btn btn-outline-primary" href="/ReportPDF/GeneratePDF" role="button"><b><h4>Print Report</h4></b></a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <script src="~/js/sb-admin-2.min.js"></script>
+        <script src="~/js/Chart.min.js"></script>
+        <script src="~/js/chart-area-demo.js"></script>
+        <script src="~/js/chart-pie-demo.js"></script>
+    }
+}

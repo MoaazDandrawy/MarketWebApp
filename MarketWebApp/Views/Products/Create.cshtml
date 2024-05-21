@@ -1,0 +1,127 @@
+﻿@model MarketWebApp.ViewModel.Product.AddProductViewModel
+
+@{
+    ViewData["Title"] = "Create Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<div class="container">
+    <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                    <h1 class="fw-bold mb-0 fs-2">Add New Product</h1>
+                    @*<a asp-action="Index"><li class="fa fa-close"></li></a>*@
+                </div>
+                <hr />
+
+
+                <div class="modal-body p-3 pt-0 mb-2">
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                            <div class="col">
+                                <label asp-for="Unit" class="control-label"></label>
+                                <div class="form-outline mb-4">
+                                    <select asp-for="Unit" class="form-control" asp-items="ViewBag.Unit">
+                                        <option value="kg">kg</option>
+                                        <option value="g">g</option>
+                                        <option value="piece">piece</option>
+                                    </select>
+                                    <span asp-validation-for="Unit" class="text-danger"></span>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <label asp-for="Detail" class="control-label"></label>
+                                <input asp-for="Detail" class="form-control" />
+                                <span asp-validation-for="Detail" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4">
+                         <div class="col">
+                            <div class="form-outline">
+                                <label asp-for="Price" class="control-label"></label>
+                                <input asp-for="Price" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <label asp-for="Discount" class="control-label"></label>
+                                <input asp-for="Discount" class="form-control" />
+                                <span asp-validation-for="Discount" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+        
+
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <label asp-for="Stock" class="control-label"></label>
+                                <input asp-for="Stock" class="form-control" />
+                                <span asp-validation-for="Stock" class="text-danger"></span>
+                            </div>
+                        </div>
+                   
+                        <div class="col">
+                            <div class="form-outline">
+                                <label class="control-label" for="inputGroupFile02">Product Image</label>
+                                <input asp-for="Img" type="file" class="form-control" id="inputGroupFile02">
+                                <span asp-validation-for="Img" class="text-danger"></span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                     <div class="row mb-4">
+                        <div class="col">
+                            <label asp-for="CategoryID" class="control-label"></label>
+                            <div class="form-outline mb-4">
+                                <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                                <span asp-validation-for="CategoryID" class="text-danger"></span>
+                            </div>
+                        </div>
+                    
+                        <div class="col">
+                            <label asp-for="SupplierId" class="control-label"></label>
+                            <div class="form-outline mb-4">
+                                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                                <span asp-validation-for="SupplierId" class="text-danger"></span>
+                            </div>
+                        </div>
+                     </div>
+                      <br />
+                        <div class="d-grid gap-2">
+                            <input type="submit" value="Create" class="btn btn-outline-success rounded-3" />
+                            <a class="btn btn-outline-secondary rounded-3" asp-action="Index"> Cancel </a>
+                        </div><br />
+                        <small class="text-body-secondary">Using the Create page, you can add an unlimited number of Products.</small>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

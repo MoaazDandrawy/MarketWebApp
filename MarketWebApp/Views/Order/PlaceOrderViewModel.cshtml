@@ -1,0 +1,30 @@
+<<<<<<< Updated upstream
+﻿@*  @model PlaceOrderViewModel
+ 
+=======
+﻿@model MarketWebApp.PlaceOrderViewModel
+
+>>>>>>> Stashed changes
+<h2>Place Order</h2>
+
+
+
+@using (Html.BeginForm("ConfirmOrder", "Order", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.SelectedLocationId, "Select Location:")
+    @Html.DropDownListFor(m => m.SelectedLocationId, new SelectList(Model.Locations, "ID", "Name"))
+    <br />
+    <input type="submit" value="Place Order" />
+}
+
+<h3>Shopping Cart:</h3>
+<ul>
+    @foreach (var productCart in Model.ShoppingCart.ProductCarts)
+    {
+        <li>@productCart.Product.Name - Quantity: @productCart.Quantity</li>
+    }
+</ul>
+
+
+
+ *@

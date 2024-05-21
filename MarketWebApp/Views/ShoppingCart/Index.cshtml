@@ -1,0 +1,103 @@
+﻿ @model IEnumerable<MarketWebApp.Models.Entity.ProductCart>
+@{
+    ViewData["Title"] = "ShoppingCart";
+}
+
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg=@Url.Content("~/img/breadcrumb.jpg")>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Shopping Cart</h2>
+                    <div class="breadcrumb__option">
+                        <a href="~/home/index">Home</a>
+                        <span>Shopping Cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+@if (TempData["EmptyShoppingCart"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["EmptyShoppingCart"]
+    </div>
+}
+@if (TempData["DeletedMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["DeletedMessage"]
+    </div>
+}
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shoping__product">Products</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img width="100px" height="101px" src="@Url.Content("~/img/product/" + item.Product.Img)" alt="" />
+                                        <h5>@item.Product.Name</h5>
+                                    </td>
+                                    <td hidden class="stock">@item.Product.Stock</td>
+                                    <td class="shoping__cart__price">@(item.Product.Price - (item.Product.Price * item.Product.Discount / 100)) L.E </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input readonly id="@item.ProductId" type="text" class="total-Quantity" value="@item.Quantity">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total total-price">@((item.Product.Price - (item.Product.Price * item.Product.Discount / 100)) * item.Quantity) L.E</td>
+                                    <td class="shoping__cart__item__close">
+                                        <a onclick="ShopCartDelete()" class="delete-link" data-id="@item.ID"><i class="icon_close"></i></a>
+                                    </td>
+                                    <td class="shoping__cart__total" id="TotalPrice"></td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    <a href="~/shop/" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a asp-controller="order" asp-action="OrderHistory" class="primary-btn cart-btn">Order History</a>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>Cart Total</h5>
+                    <ul>
+                        <li id="Total">Total <span></span></li>
+                    <a asp-action="PlaceOrder" asp-controller="Order" class="primary-btn">PROCEED TO CHECKOUT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

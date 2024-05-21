@@ -1,0 +1,131 @@
+﻿ @model dynamic
+@{
+    ViewData["Title"] = "Shop";
+}
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg=@Url.Content("~/img/breadcrumb.jpg")>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Se7teenW3fia</h2>
+                    <div class="breadcrumb__option">
+                        <a href="./index.html">Home</a>
+                        <span>Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <h4>Department</h4>
+                        <ul>
+                            @foreach (var Catagory in ViewBag.Categories)
+                            {
+                                <li><a href="~/shop/product/@Catagory.ID">@Catagory.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-7">
+                <div class="product__discount">
+                    <div class="section-title product__discount__title">
+                        <h2>Sale Off</h2>
+                    </div>
+                    <div class="row">
+                        <div class="product__discount__slider owl-carousel">
+                            @foreach (var DProduct in Model.Discount)
+                            {
+                                <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg" data-setbg=@Url.Content("~/img/product/" + DProduct.Img)>
+                                            <div class="product__discount__percent">-@DProduct.Discount %</div>
+                                            <ul class="product__item__pic__hover">
+                                                <li>
+                                                    <form onsubmit="return ADDWish(this);" asp-action="AddProductToWish" asp-controller="WishList" asp-route-id="@DProduct.ID">
+                                                        <button type="submit" style="border:none; background-color:transparent">
+                                                            <a><i class="fa fa-heart"></i></a>
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form onsubmit="return ADDCart(this);" method="post" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@DProduct.ID">
+                                                        <button type="submit" style="border:none; background-color:transparent">
+                                                            <a><i class="fa fa-shopping-cart"></i></a>
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__discount__item__text">
+                                            <h5><a href="~/home/Details/@DProduct.ID">@DProduct.Name</a></h5>
+                                            <div class="product__item__price">@(DProduct.Price - (DProduct.Price * DProduct.Discount / 100)) L.E <span>@DProduct.Price L.E</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            };
+                        </div>
+                    </div>
+                </div>
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__found">
+                                <h6><span>@Model.Count</span> Products found</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg=@Url.Content("~/img/product/" + product.Img)>
+                                    <ul class="product__item__pic__hover">
+                                        <li>
+                                            <form onsubmit="return ADDWish(this);" asp-action="AddProductToWish" asp-controller="WishList" asp-route-id="@product.ID">
+                                                <button type="submit" style="border:none; background-color:transparent">
+                                                    <a><i class="fa fa-heart"></i></a>
+                                                </button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form onsubmit="return ADDCart(this);" method="post" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@product.ID">
+                                                <button type="submit" style="border:none; background-color:transparent">
+                                                    <a><i class="fa fa-shopping-cart"></i></a>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="~/home/Details/@product.ID">@product.Name</a></h6>
+                                    <h5>@(product.Price - (product.Price * product.Discount / 100)) L.E</h5>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div style="text-align:center" class="product__pagination">
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <a href="@Url.Action("Index", new { page = i })">@i</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->

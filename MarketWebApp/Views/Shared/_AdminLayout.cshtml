@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+
+
+    <link href="~/css/style.css" rel="stylesheet" />
+    <style>
+        table {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        .p-3 {
+            padding: 2rem !important;
+        }
+        .p-5
+        {
+            padding-bottom: 0rem !important;
+            padding-top: 3rem !important;
+            padding-right: 3rem !important;
+            padding-left: 3rem !important;
+        }
+
+        h1.fw-bold.mb-0.fs-3 {
+            font-weight: 500;
+        }
+        h1.fw-bold.mb-0.fs-2 {
+            font-weight: 600;
+            font-size: 43px;
+        }
+
+        .card-cant {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            
+            position: relative;
+            display: -ms-flexbox;
+            -ms-flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: 0.25rem;
+        }
+
+        .card-cant img {
+            max-width: 60%;
+            display: block; /* Ensures the image is a block element for centering */
+            margin: 0 auto; /* Centers the image horizontally within its parent */
+            padding: 1rem;
+        }
+
+        .custom-btn-style {
+            background-color: black;
+            color: white;
+        }
+
+        .btn:hover {
+            color: #212529;
+            text-decoration: none;
+        }
+
+        .btn-outline-light:hover {
+            color: #212529;
+            background-color: #7c7f83;
+        }
+        /* Define the color for the active page */
+        .page-item.active .page-link {
+            background-color: black;
+            border-color: gray;
+        }
+
+        /* Define the text color for the active page */
+        .page-item.active .page-link {
+            color: #ffffff; /* White text on green background */
+        }
+
+        #searching {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+   <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/img/se7teen-logo.png" /> </a>
+        </div>
+        <div class="humberger__menu__widget">
+            <div class="header__top__right__auth">
+                <a asp-area="" asp-controller="Account" asp-action="Logout"><i class="fa fa-user"></i>Welcome @User.Identity?.Name!</a>
+                @* <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a> *@
+
+            </div>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu" >
+                <ul>
+                    <li ><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="active">
+                    <a class="nav-link " asp-area="" asp-controller="DashBord" asp-action="Index">DashBord</a>
+                </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">Department</a>
+                    </li>
+                    <li><a class="nav-link" asp-area="" asp-controller="Suppliers" asp-action="Index">Supplier</a></li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Product</a>
+                    </li>
+                    @* <li>
+                        <a class="nav-link" asp-area="" asp-action="UserHistory" asp-controller="ConfirmOrder">History</a>
+                    </li> *@
+                    <li>
+                    <a class="nav-link" asp-area="" asp-action="Index" asp-controller="ConfirmOrder">Order</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Locations" asp-action="Index">Location</a>
+                    </li>
+                </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social"></div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i>Welcome @User.Identity?.Name!</li>
+                <li>Ramadan Kareem 🌙</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- _________________________- Screen - ___________________________-- -->
+    <!-- Humberger End -->
+    <!-- Header Section Begin -->
+    <header class="header">
+         <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> Welcome @User.Identity?.Name!</li>
+                                <li>Ramadan Kareem 🌙</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__auth">
+                                @if (User.Identity?.IsAuthenticated == false)
+                                {
+                                    <div class="header__top__right__auth">
+                                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <form class="header__top__right__auth" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+                                        <a href="#" class="nav-link text-dark" onclick="this.closest('form').submit(); return false;">Logout</a>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ 
+        <div class="container">
+            <div class="row">
+                 <div class="col-lg-2">
+                @*    <div class="header__logo"> *@
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/se7teen-logo.png" /></a>
+                   @*  </div>*@
+                </div> 
+                <div class="col-lg-9">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="active">
+                                <a class="nav-link " asp-area="" asp-controller="DashBord" asp-action="Index">DashBord</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">Department</a>
+                            </li>
+                            <li><a class="nav-link" asp-area="" asp-controller="Suppliers" asp-action="Index">Supplier</a></li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Product</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-action="Index" asp-controller="ConfirmOrder">Order</a>
+                            </li>
+                           @*  <li>
+                                <a class="nav-link" asp-area="" asp-action="UserHistory" asp-controller="ConfirmOrder">History</a>
+                            </li> *@
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Locations" asp-action="Index">Location</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+               @*  <div class="col-lg-3">
+                </div> *@
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+
+    <br>
+    <div>
+        @RenderBody()
+    </div>
+    <!-- Js Plugins -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+
+
+
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>
+

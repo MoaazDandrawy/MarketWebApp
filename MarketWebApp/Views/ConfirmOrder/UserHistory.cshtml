@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MarketWebApp.ViewModel.UserOrdersViewModel>
+
+@{
+    ViewData["Title"] = " History Order";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="container">
+        <h1 class="text-center mb-4">History Of Orders</h1>
+    </div>
+    <div class="container" style="padding-bottom: 20px;">
+        <a asp-action="Index" class="btn btn-dark" style="background-color: black;"><i class="fa fa-backward"></i> Back</a>
+    </div>
+</div>
+
+<div class="container">
+    <div id="productTableContainer">
+    </div>
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center " style="padding-bottom: 40px;" id="pagination"></ul>
+        </nav>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            loadProductData(1);
+
+            function loadProductData(pageNumber) {
+                $.ajax({
+                    url: '/ConfirmOrder/GetUserHistory',
+                    type: 'GET',
+                    data: { pageNumber: pageNumber, pageSize: 1 },
+                    success: function (data) {
+                        $('#productTableContainer').html(data);
+                        displayPagination(pageNumber);
+                    },
+                    error: function () {
+                        console.log('Error loading data.');
+                    }
+                });
+            }
+
+            function displayPagination(pageNumber) {
+                var pagination = $('#pagination');
+                pagination.empty();
+
+                for (var i = 1; i <= @ViewBag.PageCount; i++) {
+                    var li = '<li class="page-item' + (i === pageNumber ? ' active' : '') + '">' +
+                        '<a class="page-link" href="#" data-page="' + i + '">' + i + '</a>' +
+                        '</li>';
+
+                    pagination.append(li);
+                }
+
+                pagination.find('a').click(function (e) {
+                    e.preventDefault();
+                    loadProductData($(this).data('page'));
+                });
+            }
+        });
+    </script>
+}

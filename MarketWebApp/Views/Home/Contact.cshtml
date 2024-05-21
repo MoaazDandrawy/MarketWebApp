@@ -1,0 +1,112 @@
+﻿@model MarketWebApp.ViewModel.ContactViewModel
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+
+   
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg=@Url.Content("~/img/breadcrumb.jpg")>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Contact Us</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Contact Us</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+                        <br />
+                        <br />
+   
+     <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_phone"></span>
+                        <h4>Phone</h4>
+                    <p>+20 1014403308</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_pin_alt"></span>
+                        <h4>Address</h4>
+                    <p>Samalut ElMinya</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_clock_alt"></span>
+                        <h4>Open time</h4>
+                        <p>10:00 am to 23:00 pm</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_mail_alt"></span>
+                        <h4>Email</h4>
+                    <p>Se7teenW3fia@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+<!-- Map Begin -->
+<div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d878.161663346892!2d30.706845226840137!3d28.309026005247414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145b17e327695dd9%3A0xb690c89a84e183a6!2z2YfYp9mK2KjYsSDYtdit2KrZitmGINmIINi52KfZgdmK2Kkg2LPZhdin2YTZiNi3!5e0!3m2!1sar!2seg!4v1710929382257!5m2!1sar!2seg"
+            height="500" style="border:5;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+    <div class="map-inside">
+        <i class="icon_pin"></i>
+        <div class="inside-widget">
+            <h4>Se7teenW3fia</h4>
+            <ul>
+                <li>Phone: +20 1014403308</li>
+                <li>Add: Samalut ElMinya</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Map End -->
+
+<!-- Contact Form Begin -->
+<div class="contact-form spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="contact__form__title">
+                    <h2>Leave Message</h2>
+                </div>
+            </div>
+        </div>
+        <form id="contactForm" method="post" action="/Home/SubmitContactForm">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <input type="text" name="Name" placeholder="Your name" required>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <textarea name="Message" placeholder="Your message" required></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                    <button type="submit" class="site-btn">SEND MESSAGE</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

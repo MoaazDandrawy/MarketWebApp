@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MarketWebApp.Models.Entity.Category>
+
+<div class="container">
+    <div class="table-responsive container mt-4" style="padding-bottom: 40px;">
+        <table class="table table-bordered">
+            <thead class="table-success">
+                <tr>
+                    <th>Name</th>
+                    <th>Picture</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td><img src="~/img/categories/@item.Img" accept=".png, .jpg, .jpeg" class="rounded-circle" height="40" width="40" /></td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-outline-success">
+                                <i class="fa fa-pencil"></i> Edit
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-outline-danger">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

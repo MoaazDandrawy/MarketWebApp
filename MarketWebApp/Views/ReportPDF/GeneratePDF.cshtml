@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Generate PDF";
+    Layout = null; // No layout for the PDF generation view
+}
+
+<center>
+    <h1><h1>Sales Report</h1></h1>
+    <h1><b>Summary</b></h1>
+    <p>The table shows the number of products, orders, and brands available on the site</p>
+    <hr /><br />
+    <table style="border: 1px solid #000; background-color: #ccc;">
+        <thead>
+            <tr>
+                <th>Number Of Category &nbsp;</th>
+                <th>Number Of Brand &nbsp;</th>
+                <th>Number Of Product &nbsp;</th>
+                <th>Number Of Order &nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@ViewBag.CategoryCount</td>
+                <td>@ViewBag.SupplierCount</td>
+                <td>@ViewBag.productCount</td>
+                <td>@ViewBag.orderCount</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <h1><b>Earnings</b></h1>
+    <p>The table shows the number of orders and profits per month and year</p>
+    <hr /><br />
+    <table style="border: 1px solid #000; background-color: #ccc;">
+        <thead>
+            <tr>
+                <th colspan="3">Number Of Order in Current Month</th>
+                <th colspan="3">Number Of Order in Current Year</th>
+            </tr>
+            <tr>
+                <th>Month</th>
+                <th>Number Of Order</th>
+                <th>Cost</th>
+                <th>Year</th>
+                <th>Number Of Order</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@DateTime.Now.Month</td>
+                <td>@ViewBag.monthOrders</td>
+                <td>@ViewBag.monthCost</td>
+                <td>@DateTime.Now.Year</td>
+                <td>@ViewBag.yearOrders</td>
+                <td>@ViewBag.yearCost</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+</center>

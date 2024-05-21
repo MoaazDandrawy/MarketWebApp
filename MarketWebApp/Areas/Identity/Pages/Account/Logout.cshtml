@@ -1,0 +1,86 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "";
+}
+
+<head>
+    <h1>@ViewData["Title"]</h1>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="~/css/Logout.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    </head>
+<body>
+
+
+
+
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> Welcome @User.Identity?.Name!</li>
+                                <li>Ramadan Kareem 🌙</li>
+                                <li class="home"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="https://www.facebook.com/profile.php?id=100046884501118"><i class="fa fa-facebook"></i></a>
+                                <a href="https://api.whatsapp.com/send/?phone=201014403309&text&type=phone_number&app_absent=0"><i class="fa fa-whatsapp"></i></a>
+                            </div>
+                            <div class="header__top__right__auth">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <section>
+    <div class="form-box">
+        <div class="form-value">
+
+        
+
+
+
+        @{
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <form class="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <p class="h">Log out</p>
+                    <div class="logout">
+                    <p>Are you sure you want to log out?</p>
+                    </div>
+                    <button type="submit"id="create">Click here to Logout</button>
+                </form>
+            }
+        }
+        </div>
+    </div>
+
+    </section>
+    </body>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MarketWebApp.Models.Entity.OrderProduct>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container text-center">
+    <h1>Details</h1>
+
+    <table class="table table table-hover table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Product)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Order)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderId)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <div><a class="btn btn-outline-primary " asp-action="Index">Back To Orders List</a></div>
+    </div>
+</div>

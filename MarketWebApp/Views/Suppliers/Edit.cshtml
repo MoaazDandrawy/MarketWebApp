@@ -1,0 +1,58 @@
+﻿@model MarketWebApp.ViewModel.Supplier.EditSupplierViewModel
+
+@{
+    ViewData["Title"] = "Edit Supplier";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-3">Edit Supplier</h1>
+@*                 <a class="btn-close" asp-action="Index"></a>
+ *@            </div>
+            <hr />
+
+
+            <div class="modal-body p-3 pt-0 mb-2">
+                <!-- Added mb-2 for margin bottom -->
+                <form asp-action="Edit" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="ID" class="form-control" />
+                    </div>
+                    <label asp-for="Name" class="control-label"></label>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <label asp-for="Phone" class="control-label"></label>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <label asp-for="Location" class="control-label"></label>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Location" class="form-control" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <input type="submit" value="Edit" class="btn btn-success rounded-3" />
+                        <a class="btn btn-outline-secondary rounded-3" asp-action="Index"> Cancel </a>
+                    </div><br />
+                    <small class="text-body-secondary">Using the Edit page, you can Edit any Supplier.</small>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
